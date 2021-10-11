@@ -1,0 +1,27 @@
+<mat-card fxLayout="column">
+  <mat-card-title>Template Drive</mat-card-title>
+  <!-- f points to FormGroup instance which returned by ngForm directive -->
+  <form ngForm #f="ngForm" fxLayout="column">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" ngModel name="name" #name="ngModel" required>
+      <mat-error *ngIf="name.invalid">
+        Name can't be empty!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Age" ngModel name="age" #a="ngModel">
+    </mat-form-field>
+    <div ngModelGroup="fullName" fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column" fxLayoutGap.xs="0px">
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput type="text" placeholder="First Name" ngModel name="firstName">
+      </mat-form-field>
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput type="text" placeholder="Last Name" ngModel name="lastName">
+      </mat-form-field>
+    </div>
+    <p>
+      <button type="button" mat-raised-button color="primary" (click)="onSubmit(f.value)">Submit</button>
+    </p>
+  </form>
+  <p>Age Value: {{ a.value }}</p>
+</mat-card>

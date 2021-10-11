@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse Proxy</title>
+</head>
+<body>
+<p id="msg">Hello, </p>
+<script>
+  // fetch('http://localhost:3000/name')
+  fetch('http://localhost:80/api/name')
+    .then(res => res.text())
+    .then(function(response) {
+      var text = document.createTextNode(response);
+      document.getElementById('msg').appendChild(text);
+    });
+</script>
+</body>
+</html>

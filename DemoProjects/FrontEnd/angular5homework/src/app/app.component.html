@@ -1,0 +1,26 @@
+<mat-sidenav-container class="example-container" fullscreen>
+  <mat-sidenav #sidenav mode="over" [(opened)]="open">
+    <mat-nav-list>
+      <h3 color="primary">Angular 5 Homework</h3>
+
+      <div *ngIf="(this.as.userSubject | async); else loggedIn">
+        <a mat-list-item routerLink="/home" (click)="this.open = false;">Home</a>
+        <a mat-list-item routerLink="/add_product" (click)="this.open = false;">Add Product</a>
+        <a mat-list-item (click)="this.open = false; logout();">Logout</a>
+      </div>
+      <ng-template #loggedIn>
+        <a mat-list-item routerLink="/login" (click)="this.open = false;">Login</a>
+        <a mat-list-item routerLink="/register" (click)="this.open = false;">Register</a>
+      </ng-template>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (onNavOpen)="handleNavOpen($event)"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

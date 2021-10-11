@@ -1,0 +1,32 @@
+<div fxLayout fxLayoutAlign="center" style="margin: 50px 50px;">
+  <mat-card fxLayout="column" fxFlex="1 1 50%" fxFlex.lt-sm="1 1 auto">
+    <mat-card-title>Login</mat-card-title>
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" fxLayout="column" #loginForm="ngForm" (input)="updateErr()">
+      <mat-form-field>
+        <mat-placeholder>Email</mat-placeholder>
+        <input type="text" matInput id="email" formControlName="email" required>
+        <mat-error *ngIf="(loginForm.submitted || loginFormGroup.get('email').touched) && loginFormGroup.get('email').invalid">
+          Email can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Password</mat-placeholder>
+        <input type="password" matInput id="password" formControlName="password" required>
+        <mat-error *ngIf="(loginForm.submitted || loginFormGroup.get('password').touched) && loginFormGroup.get('password').invalid">
+          Password can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="loginForm.submitted && err">
+        Your email and password does not match records.
+      </mat-error>
+      <p>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+        <a mat-button color="primary" (click)="onRegister()">Register</a>
+      </p>
+      <p>
+        <button type="button" mat-raised-button color="primary" (click)="signInWithFB()">FB Login</button>
+        <button type="button" mat-raised-button color="primary" (click)="signInWithGoogle()">Google Login</button>
+      </p>
+    </form>
+  </mat-card>
+</div>

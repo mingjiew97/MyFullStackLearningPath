@@ -1,0 +1,13 @@
+<!--https://material.angular.io/components/toolbar/overview-->
+<!--https://material.angular.io/components/icon/overview-->
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="onClickMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Angular 5 Homework</span>
+  <span class="example-fill-remaining-space"></span>
+  <span *ngIf="(this.as.userSubject | async)?.name">
+    <!--<button mat-button color="default">Login</button>-->
+    Welcome, {{(this.as.userSubject | async)?.name }}
+  </span>
+</mat-toolbar>

@@ -1,0 +1,38 @@
+<mat-card fxLayout="column">
+  <mat-card-title>Reactive Form - Form Builder</mat-card-title>
+  <form [formGroup]="myFBFormGroup" (ngSubmit)="onSubmit()" fxLayout="column" #myFBForm="ngForm">
+    <mat-form-field>
+      <mat-placeholder>Name:</mat-placeholder>
+      <input type="text" matInput id="name" [formControl]="nameControl" required>
+      <mat-error *ngIf="nameControl.errors && nameControl.errors.required">
+        Name can't be empty!
+      </mat-error>
+      <mat-error *ngIf="nameControl.errors && nameControl.errors.maxlength">
+        Name can't be too long!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Age:</mat-placeholder>
+      <input type="number" matInput id="age" formControlName="age">
+      <mat-error *ngIf="myFBFormGroup.get('age').invalid">
+        {{ myFBFormGroup.get('age').errors | json }}
+      </mat-error>
+    </mat-form-field>
+    <div formGroupName="fullName" fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
+      <mat-form-field fxFlex="1 1 auto">
+        <mat-placeholder>First Name:</mat-placeholder>
+        <input type="text" matInput id="firstname" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field fxFlex="1 1 auto">
+        <mat-placeholder>Last Name:</mat-placeholder>
+        <input type="text" matInput id="lastname" formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('fullName').touched) && myFBFormGroup.get('fullName').invalid">
+      {{ myFBFormGroup.get('fullName').errors | json }}
+    </mat-error>
+    <p>
+      <button type="submit" mat-raised-button color="default">Submit</button>
+    </p>
+  </form>
+</mat-card>

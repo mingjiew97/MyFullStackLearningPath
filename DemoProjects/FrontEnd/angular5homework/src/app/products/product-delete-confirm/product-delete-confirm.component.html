@@ -1,0 +1,8 @@
+<h4 mat-dialog-title>Delete Product</h4>
+<div mat-dialog-content>
+  <p>Are your sure to delete <strong>{{ data.name }}</strong>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onCancel()" cdkFocusInitial>Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="data.name">Confirm</button>
+</div>

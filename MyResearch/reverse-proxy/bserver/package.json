@@ -1,0 +1,17 @@
+{
+  "name": "bserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bapp",
+    "server1": "PORT=3000 node bapp",
+    "server2": "PORT=3001 node bapp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

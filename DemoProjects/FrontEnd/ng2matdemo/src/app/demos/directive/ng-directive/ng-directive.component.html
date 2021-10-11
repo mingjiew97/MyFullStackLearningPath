@@ -1,0 +1,23 @@
+<h3>Attribute Directive</h3>
+<p [ngStyle]="{color: myColor}">ngStyle 1</p>
+<p [ngStyle]="myStyle">ngStyle 2</p>
+<p [ngClass]="myClass">ngClass 1</p>
+<p [ngClass]="'my-class'">ngClass 2</p>
+<p ngClass="my-class">ng Class 3</p>
+<p [ngClass]="['my-class', 'my-class1']">ngClass 4</p>
+<p [ngClass]="{'my-class': true, 'my-class1': false}">ngClass 5</p>
+
+<h3>Structural Directive</h3>
+<!-- *ngIf, *ngFor, ngSwitch -->
+
+<!--<li *ngFor="let p of people; let i = index;"></li>-->
+
+<div [ngSwitch]="mySwitch">
+  <p *ngSwitchDefault>Switch to default</p>
+  <p *ngSwitchCase="1">Switch 1</p>
+  <p *ngSwitchCase="2">Switch 2</p>
+  <p *ngSwitchCase="3">Switch 3</p>
+</div>
+<button mat-raised-button color="primary" (click)="mySwitch=1">1</button>
+<button mat-raised-button color="primary" (click)="mySwitch=2">2</button>
+<button mat-raised-button color="primary" (click)="mySwitch=3">3</button>

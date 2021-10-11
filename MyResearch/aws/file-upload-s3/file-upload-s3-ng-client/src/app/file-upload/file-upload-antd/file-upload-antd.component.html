@@ -1,0 +1,23 @@
+<div class="file-upload-container">
+  <h2>Ant Design Version</h2>
+  <nz-upload [nzMultiple]="0" [nzFileList]="fileList"
+             [nzBeforeUpload]="beforeUpload" [nzShowUploadList]="showUploadListOptions"
+             [nzRemove]="handleDelete">
+    <button nz-button><i nz-icon nzType="upload"></i>Select</button>
+  </nz-upload>
+  <p>
+    <nz-progress [nzPercent]="percent" *ngIf="nzFileWrappers.length != 0 && (this.percent > 0)"></nz-progress>
+    <br>
+    <button
+      nz-button
+      [nzType]="'primary'"
+      (click)="upload()"
+      [disabled]="nzFileWrappers.length == 0 || (this.percent > 0 && this.percent < 100)"
+    >
+      Upload
+    </button>
+  </p>
+<!--  <a [href]="downloadUrl" target="_blank" *ngIf="!uploading" class="image-container">-->
+<!--    View Image-->
+<!--  </a>-->
+</div>

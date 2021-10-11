@@ -1,0 +1,11 @@
+[Unit]
+Description=Spring JWT Demo server
+After=syslog.target
+ 
+[Service]
+User=ubuntu
+ExecStart=/home/ubuntu/spring-jwt-demo/spring-jwt-demo-0.0.1-SNAPSHOT.jar SuccessExitStatus=143
+ 
+[Install] 
+WantedBy=multi-user.target
+

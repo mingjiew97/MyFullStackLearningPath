@@ -1,0 +1,6 @@
+<h3>Form Observable</h3>
+<mat-form-field>
+  <input type="number" name="counter" [formControl]="counterFC" matInput placeholder="Counter">
+</mat-form-field>
+<p>{{ counter }}</p>
+<button mat-raised-button color="accent" (click)="unsubscribe()">Unsubscribe</button>

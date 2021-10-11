@@ -1,0 +1,9 @@
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone','Apple',100,100,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone3G','Apple',200,200,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone3G.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone3GS','Apple',300,300,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone3GS.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone4','Apple',400,400,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone4.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone4S','Apple',500,500,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone4S.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone5','Apple',600,600,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone5.jpeg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone5C','Apple',700,700,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone5c.png');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone5S','Apple',800,800,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone5s.jpg');
+Insert into MSI_PRODUCT (NAME,BRAND,PRICE,STOCK,IMAGE) values ('iPhone6','Apple',900,900,'https://s3.us-east-2.amazonaws.com/msi-tech-2019/iphone6.jpg');

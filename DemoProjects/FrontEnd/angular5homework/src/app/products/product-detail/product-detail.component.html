@@ -1,0 +1,46 @@
+<div fxLayout="column" fxLayoutGap="30px" style="margin: 50px 100px;">
+  <mat-card fxLayout="column">
+    <mat-card-title>{{ addMode ? 'Add' : 'Edit' }} Product</mat-card-title>
+    <form [formGroup]="myFBFormGroup" (ngSubmit)="onSubmit()" fxLayout="column" #myFBForm="ngForm">
+      <mat-form-field>
+        <mat-placeholder>Name:</mat-placeholder>
+        <input type="text" matInput id="name" formControlName="name" required>
+        <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('name').touched) && myFBFormGroup.get('name').invalid">
+          Name can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Brand:</mat-placeholder>
+        <input type="text" matInput id="brand" formControlName="brand" required>
+        <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('brand').touched) && myFBFormGroup.get('brand').invalid">
+          Brand can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Price:</mat-placeholder>
+        <input type="text" matInput id="price" formControlName="price" required>
+        <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('price').touched) && myFBFormGroup.get('price').invalid">
+          Price can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Stock:</mat-placeholder>
+        <input type="text" matInput id="stock" formControlName="stock" required>
+        <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('stock').touched) && myFBFormGroup.get('stock').invalid">
+          Stock can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Image:</mat-placeholder>
+        <input type="text" matInput id="image" formControlName="image" required>
+        <mat-error *ngIf="(myFBForm.submitted || myFBFormGroup.get('image').touched) && myFBFormGroup.get('image').invalid">
+          Image can't be empty!
+        </mat-error>
+      </mat-form-field>
+      <p>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </p>
+    </form>
+  </mat-card>
+</div>

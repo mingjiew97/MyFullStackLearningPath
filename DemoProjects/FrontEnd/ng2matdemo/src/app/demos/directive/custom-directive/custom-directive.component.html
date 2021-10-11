@@ -1,0 +1,13 @@
+<h3>Custom Directive</h3>
+<div appMyhidden [person]="person">
+  Person: {{ person ? person.name : '' }}
+</div>
+<div *appMyif="person">
+  Person: {{ person.name }}
+</div>
+<p>
+  <button mat-raised-button color="default" (click)="togglePerson()">Toggle</button>
+</p>
+
+
+<!--<app-hero-detail [hdHero]="selectedHero"></app-hero-detail>-->

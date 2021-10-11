@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shipping Service</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("mainApp", []);
+		app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
+			$scope.shipments = [];
+			$http.get("/shipments")
+				.then(function(res) {
+					$scope.shipments = res.data;
+				});
+		}]);
+	</script>
+</head>
+<body ng-app="mainApp">
+<main class="container" ng-controller="mainCtrl">
+	<h2>Shipments</h2>
+	<table class="table table-bordered table-stripped">
+		<thead>
+			<tr>
+				<th>Order ID</th>
+				<th>Shipping Status</th>
+				<th>Operation</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="shipment in shipments">
+				<td>{{shipment.orderId}}</td>
+				<td>{{shipment.status}}</td>
+				<td>
+					<button class="btn btn-primary">Ship</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</main>
+</body>
+</html>

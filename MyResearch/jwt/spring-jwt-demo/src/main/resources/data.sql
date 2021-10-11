@@ -1,0 +1,2 @@
+INSERT INTO msi_authority VALUES(1, 'ROLE_ADMIN')
+INSERT INTO msi_authority VALUES(2, 'ROLE_USER')

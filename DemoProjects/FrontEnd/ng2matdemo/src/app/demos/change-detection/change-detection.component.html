@@ -1,0 +1,38 @@
+<h2>Change Detection</h2>
+<div>
+  <p>Age in CD: {{ person.age }}</p>
+  <button mat-raised-button color="accent" (click)="addAge()">Add Age</button>
+  <button mat-raised-button color="accent" (click)="updateAge()">Update Age</button>
+  <app-cd-person [person]="person"></app-cd-person>
+</div>
+
+<!--
+change-detection -> A,
+cd-person -> B,
+cd-person-detail -> C
+
+Change detector runs on AppComponent:
+  - update input binding for A.
+  - call ngDoCheck on A
+  - update View/DOM for AppComponent
+Change detector runs on A:
+  - update input binding for B.
+  - call ngDoCheck on B
+  - update View/DOM for A
+if(pure changes on input bindings) -> Change detector runs on B:
+  - update input binding for C.
+  - call ngDoCheck on C
+  - update View/DOM for B
+Change detector runs on C:
+  - update View/DOM for C
+End of C
+call ngAfterViewChecked on C
+End of B
+call ngAfterViewChecked on B
+End of A
+call ngAfterViewChecked on A
+End of AppComponet
+
+
+ChangeDetectorRef
+-->

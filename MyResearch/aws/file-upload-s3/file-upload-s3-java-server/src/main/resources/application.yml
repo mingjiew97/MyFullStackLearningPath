@@ -1,0 +1,13 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+aws:
+    accessKey: AKIAWOYQSFPJXGLQHDUV
+    secretKey: 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
+    region: us-east-2
+    bucket: msi-training-file-upload-s3
+

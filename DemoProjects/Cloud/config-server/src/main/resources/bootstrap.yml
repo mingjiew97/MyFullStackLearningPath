@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitlab.com/robert.shi.msi/msi-spring-cloud-config-repo.git
+          skipSslValidation: true
+server:
+  port: 7777

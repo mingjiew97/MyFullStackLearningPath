@@ -1,0 +1,17 @@
+<form #f="ngForm" (ngSubmit)="login(f.value)" class="container" fxLayout="column" fxFlex="40" fxFlexOffset="30">
+  <h2>Login</h2>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Username" name="username" ngModel="{{defaultUsername}}">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" name="password" ngModel="{{defaultPassword}}">
+  </mat-form-field>
+  <p fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px">
+    <button type="submit" mat-raised-button color="primary">Login</button>
+    <a mat-button color="primary" routerLink="/register">Register</a>
+  </p>
+  <p fxLayout="row" fxLayoutAlign="start" fxLayoutGap="10px">
+    <button type="button" (click)="populate('user')" mat-raised-button color="accent">Populate User</button>
+    <button type="button" (click)="populate('admin')" mat-raised-button color="accent">Populate Admin</button>
+  </p>
+</form>

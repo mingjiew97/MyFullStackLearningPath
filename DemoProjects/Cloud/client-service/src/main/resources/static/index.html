@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shipping Service</title>
+	<link rel="stylesheet" type="text/css" href="./bootstrap.min.css">
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript">
+		var API = "http://localhost:8666";
+		var clientId = "angular", clientSecret="msi";
+		$(document).ready(function() {
+			var $psResult = $('#ps-result');
+			$('#load-all-products-btn').click(function() {
+				$.get(`${API}/products`).then(function(res) {
+					$psResult.html(JSON.stringify(res));
+				});
+			});
+			$('#reload-product-service-btn').click(function() {
+				// bypass gateway timeout. need to fix.
+				$psResult.html('Start reloading, please wait...');
+				$.post(`${API}/products/actuator/refresh`, {}).then(function(res) {
+					$psResult.html('Reload Done! Try to load products again.');
+				});
+			});
+			$('#login').click(function() {
+				$.ajax({
+					type: "post",
+					url: "http://localhost:8666/auth/oauth/token",
+					headers: {
+					    "Authorization": "Basic " + btoa(clientId + ":" + clientSecret)
+					},
+					data: {
+						grant_type: 'password',
+						scope: 'all',
+						username: $('#username').val(),
+						password: $('#password').val()
+					}
+				}).then(function(res) {
+					$('#login-result').html(JSON.stringify(res));
+					// save token in local storage for later usage
+					if (res) {
+						localStorage.setItem('access_token', res.access_token);
+						localStorage.setItem('refresh_token', res.refresh_token);
+					}
+				});
+			});
+			$('#logout').click(function() {
+				$.ajax({
+					type: "delete",
+					url: `${API}/auth/oauth/token`,
+					headers: {
+					    "Authorization": "Basic " + btoa(clientId + ":" + clientSecret)
+					},
+					data: {
+						access_token: localStorage.getItem('access_token')
+					}
+				}).done(function(res) {
+					$('#login-result').html(JSON.stringify(res));
+					if(res) {
+						localStorage.removeItem('access_token');
+						localStorage.removeItem('refresh_token');
+					}
+				}).fail(function(err) {
+					$('#login-result').html(JSON.stringify(err.responseText));
+				});
+			});
+			$('#refresh').click(function() {
+				$.ajax({
+					type: "post",
+					url: "http://localhost:8666/auth/oauth/token",
+					headers: {
+					    "Authorization": "Basic " + btoa(clientId + ":" + clientSecret)
+					},
+					data: {
+						grant_type: 'refresh_token',
+						scope: 'all',
+						refresh_token: localStorage.getItem('refresh_token')
+					}
+				}).then(function(res) {
+					$('#login-result').html(JSON.stringify(res));
+					// save new access token in local storage for later usage
+					if (res) {
+						localStorage.setItem('access_token', res.access_token);
+					}
+				});
+			});
+			var $osResult = $('#os-result');
+			$('#load-all-orders-btn').click(function() {
+				$.ajax({
+					type: "get",
+					url: `${API}/orders`,
+					headers: {
+					    "Authorization": "Bearer " + localStorage.getItem('access_token')
+					}
+				}).done(function(res) {
+					$osResult.html(JSON.stringify(res));
+				}).fail(function(err) {
+					$osResult.html(err.responseText);
+				});
+			});
+			$('#add-order').click(function() {
+				$.ajax({
+					type: 'POST',
+					url: `${API}/orders`, 
+					data: JSON.stringify({
+						"time": new Date().toISOString(),
+						"quantity": Math.floor(Math.random() * 99) + 1,
+						"product_id": Math.floor(Math.random() * 9) + 1,
+						"user_id": Math.floor(Math.random() * 2) + 1
+					}),
+					contentType: 'application/json'
+				}).then(function(res) {
+					$osResult.html('Test order added.');
+				});
+			});
+			$('#get-order-v1').click(function() {
+				$.get(`${API}/orders/1/v1`).then(function(res) {
+					$osResult.html(JSON.stringify(res));
+				});
+			});
+			$('#get-order-v2').click(function() {
+				$.get(`${API}/orders/1/v2`).then(function(res) {
+					$osResult.html(JSON.stringify(res));
+				});
+			});
+			$('#clear-os-result').click(function() {
+				$osResult.html('');
+			});
+			$('#load-orders-shipping').click(function() {
+				$.get(`${API}/shipping/orders`).done(function(res) {
+					$('#ss-result').html(JSON.stringify(res));
+				}).fail(function(err) {
+					$('#ss-result').html("something strange happended, try again...");
+				});
+			});
+			$('#load-orders-email').click(function() {
+				$.get(`${API}/email/orders`).done(function(res) {
+					$('#es-result').html(JSON.stringify(res));
+				}).fail(function(err) {
+					$('#es-result').html("something strange happended, try again...");
+				});
+			});
+			$('#load-orders-reporting').click(function() {
+				$.get(`${API}/reporting/orders`).done(function(res) {
+					$('#rs-result').html(JSON.stringify(res));
+				}).fail(function(err) {
+					$('#rs-result').html("something strange happended, try again...");
+				});
+			});
+			$('#generate-report').click(function() {
+				$.ajax({
+					type: "get",
+					url: `${API}/orders/report`,
+					headers: {
+					    "Authorization": "Bearer " + localStorage.getItem('access_token')
+					}
+				}).done(function(res) {
+					$osResult.html(JSON.stringify(res));
+				}).fail(function(err) {
+					$osResult.html(err.responseText);
+				});
+			});
+			$('#flush-orders-shipping').click(function() {
+				$.get(`${API}/shipping/flush`).done(function(res) {
+					$('#ss-result').html(JSON.stringify(res));
+				});
+			});
+			$('#flush-orders-email').click(function() {
+				$.get(`${API}/email/flush`).done(function(res) {
+					$('#es-result').html(JSON.stringify(res));
+				});
+			});
+			$('#flush-orders-reporting').click(function() {
+				$.get(`${API}/reporting/flush`).done(function(res) {
+					$('#rs-result').html(JSON.stringify(res));
+				});
+			});
+		});
+	</script>
+</head>
+<body class="container">
+<h2>&#11088; Spring Cloud Test Client &#11088;</h2>
+<hr>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Product Service</h3>
+		<p>
+		<button class="btn btn-primary" id="load-all-products-btn">Load All Products</button>
+		</p>
+		<p>
+			<button class="btn btn-info" id="reload-product-service-btn">Reload Product Service Configurations</button>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Result</h3>
+		<p id="ps-result"></p>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Auth Service</h3>
+		<p>admin/adminpass, user/userpass :)</p>
+		<p>client id: angular, client secret: msi</p>
+		<form>
+			<div class="form-group">
+				<label>Username: <input type="text" id="username" value="admin"></label>
+			</div>
+			<div class="form-group">
+				<label>Username: <input type="text" id="password" value="adminpass"></label>
+			</div>
+			<p><button class="btn btn-primary" type="button" id="login">Login</button>
+			<button class="btn btn-danger" type="button" id="logout">Logout</button>
+			<button class="btn btn-success" type="button" id="refresh">Refresh Token</button></p>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<h3>Result</h3>
+		<p id="login-result"></p>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Order Service</h3>
+		<p>
+			<button class="btn btn-primary" id="load-all-orders-btn">Load All Orders</button>
+		</p>
+		<p>
+			<button class="btn btn-danger" id="add-order">Add Order For Test</button>
+		</p>
+		<p>
+			Get Order 1: <button class="btn btn-warning" id="get-order-v1">RestTemplate Version</button>
+			<button class="btn btn-warning" id="get-order-v2">Feign Client Version</button>
+		</p>
+		<p>
+			<button class="btn btn-success" id="generate-report">Generate Report For All Orders</button>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Result <button class="btn btn-link" id="clear-os-result">Clear</button></h3>
+		<p id="os-result"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Shipping Service</h3>
+		<p>
+		<button class="btn btn-info" id="load-orders-shipping">Load Orders For Shipping</button>
+		</p>
+		<p>
+		<button class="btn btn-info" id="flush-orders-shipping">Flush Orders</button>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Result</h3>
+		<p id="ss-result"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Email Service</h3>
+		<p>
+		<button class="btn btn-info" id="load-orders-email">Load Orders For Sending Emails</button>
+		</p>
+		<p>
+		<button class="btn btn-info" id="flush-orders-email">Flush Orders</button>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Result</h3>
+		<p id="es-result"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<h3>Reporting Service</h3>
+		<p>
+		<button class="btn btn-info" id="load-orders-reporting">Load Orders For Reporting</button>
+		</p>
+		<p>
+		<button class="btn btn-info" id="flush-orders-reporting">Flush Orders</button>
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h3>Result</h3>
+		<p id="rs-result"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h3>Other Links</h3>
+		<p><a href="http://localhost:8761" target="_blank">Eureka Naming Server</a></p>
+		<p><a href="https://gitlab.com/robert.shi.msi/msi-spring-cloud-config-repo" target="_blank">Config Server Gitlab Repo</a></p>
+		<p><a href="http://localhost:9411" target="_blank">Zipkin Server</a></p>
+	</div>
+</div>
+</body>
+</html>

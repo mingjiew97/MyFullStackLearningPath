@@ -1,0 +1,25 @@
+server:
+  port: 6401
+spring:
+  application:
+    name:
+      shipping-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: shipping-service-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+  
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+hystrix:
+  shareSecurityContext: true

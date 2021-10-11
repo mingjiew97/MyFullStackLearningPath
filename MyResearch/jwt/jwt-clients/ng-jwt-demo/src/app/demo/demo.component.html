@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>API Test</h2>
+  <p>Result: {{result}}</p>
+  <p fxLayout="row" fxLayoutGap="10px">
+    <button (click)="getContent('public')" mat-raised-button color="default">Get Public Content</button>
+    <button (click)="getContent('user')" mat-raised-button color="primary">Get User Content</button>
+    <button (click)="getContent('admin')" mat-raised-button color="accent">Get Admin Content</button>
+  </p>
+</div>

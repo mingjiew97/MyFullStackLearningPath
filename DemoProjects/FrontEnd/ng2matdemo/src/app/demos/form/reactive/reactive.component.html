@@ -1,0 +1,16 @@
+<mat-card fxLayout="column">
+  <mat-card-title>Reactive Form</mat-card-title>
+  <form fxLayout="column" [formGroup]="myFormGroup">
+    <mat-form-field>
+      <mat-placeholder>Name</mat-placeholder>
+      <input type="text" matInput id="name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Age</mat-placeholder>
+      <input type="number" matInput id="age" formControlName="age">
+    </mat-form-field>
+    <p>
+      <button type="button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+    </p>
+  </form>
+</mat-card>

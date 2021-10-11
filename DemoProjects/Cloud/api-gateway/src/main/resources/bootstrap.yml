@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 8666 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    auth:
+      path: /auth/**
+      serviceId: auth-service
+    client:
+      path: /client/**
+      serviceId: client-service
+    reporting:
+      path: /reporting/**
+      serviceId: reporting-service
+    shipping:
+      path: /shipping/**
+      serviceId: shipping-service
+    email:
+      path: /email/**
+      serviceId: email-service
+    product:
+      path: /products/**
+      serviceId: product-service
+    order:
+      path: /orders/**
+      serviceId: order-service
+ribbon:
+  ReadTimeout: 60000

@@ -1,0 +1,11 @@
+import mongoose, { Schema } from 'mongoose';
+
+const ProductSchema = new Schema({
+  name: {type: String, unique: true, require: true},
+  brand: String,
+    price: Number,
+    stock: Number,
+    image: String
+}, {collection: 'products'});
+
+export default mongoose.model('Product', ProductSchema);

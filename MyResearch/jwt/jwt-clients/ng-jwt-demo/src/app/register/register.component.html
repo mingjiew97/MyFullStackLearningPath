@@ -1,0 +1,23 @@
+<form [formGroup]="fg" (ngSubmit)="register()" class="container" fxLayout="column" fxFlex="40" fxFlexOffset="30">
+  <h2>Register</h2>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Name" formControlName="name">
+    <mat-error>Name is required.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Email" formControlName="email">
+    <mat-error *ngIf="fg.get('email').errors && fg.get('email').errors.required">Email is required.</mat-error>
+    <mat-error *ngIf="fg.get('email').errors && fg.get('email').errors.email">Email must be valid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Username" formControlName="username">
+    <mat-error>Username is required.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" formControlName="password">
+    <mat-error>Password is required.</mat-error>
+  </mat-form-field>
+  <p fxLayout="row" fxLayoutAlign="space-between">
+    <button type="submit" mat-raised-button color="primary">Register</button>
+  </p>
+</form>

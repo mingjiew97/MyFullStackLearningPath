@@ -1,0 +1,19 @@
+<header>
+  <nav mat-tab-nav-bar>
+    <span class="title">ng2demo</span>
+    <a mat-tab-link routerLink="/lc" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Life Cycle</a>
+    <a mat-tab-link routerLink="/cd" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Change Detection</a>
+    <a mat-tab-link routerLink="/ve" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">View Encapsulation</a>
+    <a mat-tab-link routerLink="/f" routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive">Form</a>
+    <a mat-tab-link routerLink="/d" routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">Directive</a>
+    <a mat-tab-link routerLink="/p" routerLinkActive #rla6="routerLinkActive" [active]="rla6.isActive">Pipe</a>
+    <a mat-tab-link routerLink="/cc" routerLinkActive #rla7="routerLinkActive" [active]="rla7.isActive">Component Communication</a>
+    <a mat-tab-link routerLink="/o" routerLinkActive #rla8="routerLinkActive" [active]="rla8.isActive">Observable</a>
+    <a mat-tab-link routerLink="/r" routerLinkActive #rla9="routerLinkActive" [active]="rla9.isActive">Routing</a>
+    <a mat-tab-link routerLink="/feature" routerLinkActive #rla10="routerLinkActive" [active]="rla10.isActive">Feature</a>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer></footer>

@@ -1,0 +1,3 @@
+# Bean scope problem for Multiple Apps on same Tomcat server
+
+More to come...

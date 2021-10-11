@@ -1,0 +1,11 @@
+<Context docBase="blunderful-web" path="/blunderful" reloadable="false" source="org.eclipse.jst.j2ee.server:blunderful-web">
+	<!-- <ResourceLink name="jdbc/BlunderfulDB" global="jdbc/BlunderfulDB" type="javax.sql.DataSource"/> -->	
+	<Resource name="jdbc/BlunderfulDB" auth="Container" type="javax.sql.DataSource"
+          username="postgres"
+          password="mercury"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/postgres"
+          maxTotal="60"
+          maxIdle="20"
+          validationQuery="select 1" />	              
+</Context>

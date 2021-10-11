@@ -1,0 +1,27 @@
+<div class="file-upload-container">
+  <h2>Material Design Version</h2>
+  <div>
+    <button mat-raised-button color="warn" (click)="select()">
+      <mat-icon>file_upload</mat-icon>
+      Select
+    </button>
+    <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+  </div>
+  <mat-list>
+    <mat-list-item *ngFor="let ngFileWrapper of ngFileWrappers">
+      {{ngFileWrapper.file.name}}
+      <button mat-icon-button (click)="remove(ngFileWrapper.file)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <a [href]="ngFileWrapper.fileDto.downloadUrl" target="_blank" *ngIf="ngFileWrapper.uploaded">
+        View
+      </a>
+    </mat-list-item>
+  </mat-list>
+  <p>
+    <mat-progress-bar [value]="progress" *ngIf="ngFileWrappers.length != 0 && progress > 0"></mat-progress-bar>
+  </p>
+  <p>
+    <button mat-raised-button color="primary" (click)="upload()" [disabled]="ngFileWrappers.length == 0 || (progress > 0 && progress < 100)">Upload</button>
+  </p>
+</div>

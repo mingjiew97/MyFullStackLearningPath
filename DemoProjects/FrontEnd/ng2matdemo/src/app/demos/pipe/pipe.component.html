@@ -1,0 +1,28 @@
+<h2>Custom Pipe</h2>
+<h3>Pure Pipe</h3>
+<p>{{ money | currency }}</p>
+<p>{{ money | currencyExchange: 'CNY' | currency: 'CNY'}}</p>
+<p>{{ money | currencyExchange: 'JPY' | currency: 'JPY'}}</p>
+<!--
+  pure pipe can only detect pure change.
+  pure change includes primitive type values changes
+  and object reference change.
+  impure pipe can detect pure changes and impure changes.
+  Impure change means change in object properties or array elements.
+-->
+
+<h3>Impure Pipe</h3>
+<ul>
+  <li *ngFor="let m of moneyList | moneyFilter">
+    {{ m }}
+  </li>
+</ul>
+<div>
+  <mat-form-field>
+    <input matInput placeholder="New Money" type="number" [(ngModel)]="newMoney">
+  </mat-form-field>
+  <button (click)="addMoney()" mat-raised-button color="primary">Add Money</button>
+</div>
+
+<h3>Async Pipe - Impure Pipe</h3>
+<p>{{ fetchMoney | async | currency }}</p>
